@@ -73,3 +73,57 @@ export async function getProfile(token){
     }
     return response;
 }
+
+export async function updateUser(data) {
+    let response;
+    try {
+        const { id, fullname, mobile, email, role } = data;
+        await users.findByIdAndUpdate(
+            id,
+            {
+                fullname,
+                mobile,
+                email,
+                role
+            }
+        );
+        response = { code : 200, success: true, message : "user updated successfully.."};
+    } 
+    catch (e) {
+        response = { code : 500, message : e.message};
+    }
+    return response;
+}
+
+export async function deleteUser(data) {
+    let response;
+    try {
+
+        const { id } = data;
+
+        await users.findByIdAndDelete(id);
+
+        response = { code : 200, success: true, message : "user deleted successfully.."};
+    } 
+    catch (e) {
+        response = { code : 500, message : e.message};
+    }
+    return response;
+}
+
+
+
+export async function getAllUsers() {
+ let response;
+    try {
+
+       const alluser = await users.find();
+
+        response = { code : 200, success: true, data: alluser};
+    } 
+    catch (e) {
+        response = { code : 500, message : e.message};
+    }
+    return response;  
+
+}

@@ -20,4 +20,22 @@ router.get("/profile", async (req,res)=>{
     res.json(await userService.getProfile(req.headers.token));
 });
 
+router.put("/update", async (req,res)=>{
+    
+   res.json(await userService.updateUser(req.body));
+});
+
+
+router.delete("/delete/:id", async (req,res)=>{
+    
+    res.json(await userService.deleteUser(req.params));
+});
+
+
+router.get("/allusers", async (req,res)=>{
+    
+    res.json(await userService.getAllUsers());
+});
+
+
 export default router;
